@@ -1,0 +1,58 @@
+
+
+<%- include("partials/header") -%>
+<!-- header section --> 
+<!-- intro section -->
+<section id="intro" class="section intro">
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <h3>The Awesome Music Bootstrap Theme</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu libero scelerisque ligula sagittis faucibus eget quis lacus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
+        <a href="#Playlist" class="btn btn-large">Playlist</a> 
+    </div>
+  </div>
+</section>
+
+<!-- intro section --> 
+
+
+
+
+
+
+
+<!-- gallery section -->
+<section id="gallery" class="gallery section">
+  <div class="container-fluid">
+    <div class="section-header">
+                <h2 class="wow fadeInDown animated">Nos musiques</h2>
+                <p class="wow fadeInDown animated">Les musiques de la semaine</p>
+            </div>
+            <%- console.log(musics) -%> 
+            <div class="row no-gutter">
+         <%  musics.forEach(music => {  %>
+         
+  
+  <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="/" class="work-box"> <img src="<%= music.img %>" alt="">
+    <div class="overlay">
+      <div class="overlay-caption">
+        <p><span class="icon icon-magnifying-glass"></span></p>
+      </div>
+    </div> 
+    <!-- overlay --> 
+    </a> </div> 
+           
+
+        <%  }) %> 
+    
+      </div>
+        
+  
+  </div>
+</section>
+
+
+<!-- Footer section -->
+
+<%- include("partials/footer") -%>
+<!-- End footer -->
