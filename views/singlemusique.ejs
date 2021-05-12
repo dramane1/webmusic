@@ -43,8 +43,8 @@
   <div class="container">
     <div class="col-md-10 col-md-offset-1">
       <div class="banner-text text-center">
-        <h1>Rick Ross</h1>
-        <p>Title Of the Music</p></div>
+        <h1><%= name%> </h1>
+        <p><%= title%></p></div>
       <!-- banner text --> 
     </div>
   </div>
@@ -87,9 +87,10 @@
 
 
 <div class=" single "> 
-    <iframe height="100%" width="100%" src="https://www.youtube.com/embed/JU9TouRnO84" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <iframe height="100%" width="100%" src="<%=url%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class=" downloads-views">
-        <p class="description "> Hello this you boy mark Lorem  Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
+        <p class="description "><%= description%></p>
                  <button type="button" class="submitBnt btn">Downloads</button>
         
            </div>    

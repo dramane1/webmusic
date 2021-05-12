@@ -67,7 +67,24 @@ app.get("/musiques", (req,res)=>{
 })
 
 app.get("/musiques/:musique", (req, res)=> {
-   res.render(singlemusique);
+   
+    Music.findOne({_id:req.params.musique}, (err,result)=>{
+        if(!result){
+            console.log(err);
+        }else{
+            // res.send(result);
+             res.render("singlemusique", {
+                 name : result.artisteName,
+                 title: result.songTitle,
+                 url: result.url,
+                 description: result.description
+             })
+        }
+        
+        
+
+    } )
+   
 })
 // app.delete("/musiques", (req,res)=>{
  
