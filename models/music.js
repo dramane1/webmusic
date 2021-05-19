@@ -11,6 +11,17 @@ const musicShema = new mongoose.Schema ({
     img: String
 });
 
-const Music = mongoose.model("Music", musicShema);
+export default Music = mongoose.model("Music", musicShema);
 
-export default Music;
+
+// db for user registration and login
+
+const userSchema = new mongoose.Schema ({
+   user:String,
+   password: String
+});
+
+export default User = mongoose.model("User", userSchema);
+
+
+
