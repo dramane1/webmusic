@@ -24,6 +24,19 @@
 </head>
 
 <body>
+  <style>
+    .logout{
+      background: #e7185c;
+      color: #fff;
+
+    }
+    .logout:hover {
+      background: #c10040;
+      color: #fff;
+    }
+    
+  </style>
+
 <!-- header section -->
 <section class="banner" role="banner">
   <header id="header">
@@ -34,8 +47,17 @@
           <li><a href="musiques">Musiques</a></li>
           <!-- <li><a href="#Playlist">Clips</a></li> -->
 		  
+  
           <li><a href=""> A propos </a></li>
-          <li><a href="login"> Connecter Vous </a></li>
+         
+          <% if(isLoggedIn){ %> 
+                 <li><a href=""> Welcome <%= user %>   </a></li>
+                 <li><a href="/logout"> <input type="submit"   class="logout" value="Logout">  </a></li>
+               
+          <% } else{ %> 
+            <li><a href="login"> Connecter Vous </a></li>
+        <%   } %> 
+         
         </ul>
       </nav>
       <a href="#" class="nav-toggle">Menu<span></span></a> </div>
