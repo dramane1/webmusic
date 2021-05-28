@@ -1,19 +1,27 @@
-
-
 <%- include("partials/header") -%>
-<!-- header section --> 
+<!-- header section -->
 <!-- intro section -->
 <section id="intro" class="section intro">
+  <% if(isLoggedIn){%>
   <div class="container">
     <div class="col-md-8 col-md-offset-2 text-center">
-      <h3>The Awesome Music Bootstrap Theme</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu libero scelerisque ligula sagittis faucibus eget quis lacus.Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p> 
-        <a href="#Playlist" class="btn btn-large">Playlist</a> 
+      <h3>Bravo !! Bienvenue <%= user%> . Merci D'avoir choisit notre plateforme </h3>
+
     </div>
   </div>
+  <%  } else {%>
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <h3>Streamer les musiques du moment</h3>
+      <p>Inscrivez-vous pour déverrouiller toutes les fonctionnalités disponibles</p>
+      <a href="/register" class="btn btn-large">S'enregistrer </a>
+    </div>
+  </div>
+  <% }%>
+
 </section>
 
-<!-- intro section --> 
+<!-- intro section -->
 
 
 
@@ -24,35 +32,46 @@
 <!-- gallery section -->
 <section id="gallery" class="gallery section">
   <div class="container-fluid">
+    <%  if(isLoggedIn){%>
     <div class="section-header">
-                <h2 class="wow fadeInDown animated">Nos musiques</h2>
-                <p class="wow fadeInDown animated">Les musiques de la semaine</p>
-            </div>
-            <%- console.log(musics) -%> 
-            <div class="row no-gutter">
-         <%  musics.forEach(music => {  %>
-         
-  
-  <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="musiques/<%= music._id%>" class="work-box"> <img src="<%= music.img %>" alt="">
-    <div class="overlay">
-      <div class="overlay-caption">
-        <p><span class="icon icon-magnifying-glass"></span></p>
-      </div>
-    </div> 
-    <!-- overlay --> 
-    </a> </div> 
-           
+      <h2 class="wow fadeInDown animated">Nos musiques</h2>
+      <p class="wow fadeInDown animated">Notre meilleure sélection de la semaine</p>
+    </div>
 
-        <%  }) %> 
-    
+    <% } else{%>
+      <div class="section-header">
+        <h2 class="wow fadeInDown animated">Nos musiques</h2>
+        <p class="wow fadeInDown animated">Vous pouvez écouter 2 musiques pour le moment.
+          Connectez-vous pour en voir plus</p>
       </div>
-        
+    <%}%>
   
+            <%- console.log(musics) -%>
+    <div class="row no-gutter">
+      <%  musics.forEach(music => {  %>
+
+
+      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="musiques/<%= music._id%>" class="work-box"> <img
+            src="<%= music.img %>" alt="">
+          <div class="overlay">
+            <div class="overlay-caption">
+              <p><span class="icon icon-magnifying-glass"></span></p>
+            </div>
+          </div>
+          <!-- overlay -->
+        </a> </div>
+
+
+      <%  }) %>
+
+    </div>
+
+
   </div>
 </section>
 
 
 <!-- Footer section -->
 
-<%- include("partials/footer") -%>
+<!-- < %- include("partials/footer") -%> -->
 <!-- End footer -->

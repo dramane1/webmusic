@@ -11,7 +11,7 @@ import passportLocalMongoose from "passport-local-mongoose";
 import flash from "connect-flash";
 import LocalStrategy from "passport-local";
 import MongoStore from 'connect-mongo';
-
+import {check,validationResult } from 'express-validator';
 import bcrypt from "bcryptjs"
 
 
@@ -19,6 +19,7 @@ import bcrypt from "bcryptjs"
 const port = process.env.PORT || 4000;
 const app = express();
 
+app.use(express.json())
 // MiddleWares 
 
 app.set('view engine', 'ejs');
@@ -92,7 +93,7 @@ passport.use(
                         message: 'Password incorrect'
                     });
                     req.flash("error_msg",'Password incorrect')
-                    res.redirect("/login")
+                   return  res.redirect("/login")
                 }
             });
         });
@@ -121,15 +122,17 @@ app.use(function (req, res, next) {
 
 
 
-//   Ensure Authentication
-const ensureAuthenticated = function (req, res, next) {
+//   Ensure Authentication Custom Function 
+const ensureAuthenticated = async function (req, res, next) {
+    
     if (req.isAuthenticated()) {
+     
         return next();
     }
-    req.flash('error_msg', 'Please log in to view that resource');
+    req.flash('error_msg', 'Veuillez vous connecter pour profiter de nos fonctionnalités');
     res.redirect('/login');
 };
-const forwardAuthenticated = function (req, res, next) {
+const forwardAuthenticated =async function (req, res, next) {
     if (!req.isAuthenticated()) {
         return next();
     }
@@ -137,6 +140,8 @@ const forwardAuthenticated = function (req, res, next) {
 }
 
 //   Endpoints set up 
+
+//  Display home Page
 app.get("/", function (req, res) {
 
 
@@ -177,176 +182,32 @@ app.get("/", function (req, res) {
 
 })
 
-// Login
-app.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/',
-        failureRedirect: '/login',
-        failureFlash: true
-    })(req, res, next);
-});
+// Register Post Route 
 
-// app.post("/login",async(req,res,next)=> {
-
-// const user = new User({
-//     username: req.body.username,
-//     password: req.body.password
-// });
-// req.login(user, function(err) {
-//     if(req.body.username ='' ){
-//         req.flash('failure'," Please usernmae part")
-//     }
-//     if (err) {
-//         //  return next(err);
-//          req.flash('failure'," Oups!! Les champs utilisateur et mot de passe ne doivent pas être vides")
-//          res.redirect("/login");
-//          } else{
-//             passport.authenticate("local",
-//            {
-//             failureRedirect: '/login',
-//             successRedirect: '/', 
-//             failureFlash: true
-//            } 
-//             )(req,res, function(){
-
-//                 console.log("User Login sucessfully")
-//                 res.redirect("/");
-
-//             })
-
-//          }
-
-//   });
-// })
-// Only function  
-
-
-// End oF fUNCTION
-
-
-app.post("/musiques", (req, res) => {
-    const music = req.body;
-    Music.create(music, function (err, result) {
-        if (err) {
-            res.send(err)
-        } else {
-            res.send(result)
-        }
-    })
-
-})
-app.get("/musiques", (req, res) => {
-    if (req.isAuthenticated()) {
-        Music.find(function (err, result) {
-            if (err) {
-                res.send(err)
-            } else {
-
-                res.render("musiques", {
-                    musics: result,
-                    isLoggedIn: req.isAuthenticated()
-                });
-            }
-        })
-
-
-    } else {
-        res.redirect("/")
-    }
-
-
-
-})
-
-
-// Login Page
-app.get('/login', forwardAuthenticated, (req, res) => res.render('login'));
-// app.get("/register", (req,res,next)=>{
-//     res.render("register",{
-//         isLoggedIn: "",
-//         errors:"",
-//         user: ""
-//     } )
-//     // if (req.isAuthenticated()){
-//     //     return next();
-//     //     }
-//     //     else{
-//     //         res.render("register", {
-//     //             isLoggedIn: req.isAuthenticated()
-//     //         })
-//     //     }
-
-
-
-// } )
-// Register Page
-app.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
-// app.get("/login", (req,res,next)=>{
-//     res.render("login",{
-//         isLoggedIn: "",
-//         errors:"",
-//         user: ""
-//     })
-
-
-//     // if (req.isAuthenticated()){
-//     //     return next();
-//     // }
-//     // else{
-//     //     res.render("login", {
-//     //         isLoggedIn: req.isAuthenticated(),
-//     //         errors: req.flash('failure')
-//     //     });
-//     // }
-
-
-//  } )
-
-
-app.get("/musiques/:musique", (req, res, next) => {
-    Music.findOne({
-        _id: req.params.musique
-    }, (err, result) => {
-        if (!result) {
-            console.log(err);
-        } else {
-            // res.send(result);
-            res.render("singlemusique", {
-                name: result.artisteName,
-                title: result.songTitle,
-                url: result.url,
-                description: result.description,
-                user: req.user,
-                isLoggedIn: req.isAuthenticated()
-            })
-        }
-
-    })
-})
-
-
-
-
-app.post("/register", async (req, res, next) => {
+app.post("/register", (req, res, next) => {
+    // [ check('password').not().isEmpty().isLength({min: 6}).withMessage('error_msg','Password must have more than 6 characters')],
     const {
         username,
         password
     } = req.body;
     let errors = [];
 
+    // const error = validationResult(req);
+    // errors.push(error);
+
     if (!username || !password) {
         console.log("enter all fiedls")
-        errors.push({
-            msg: 'Please enter all fields'
+      errors.push({
+            msg: 'Veuillez saisir tous les champs'
         });
     }
 
 
     if (password.length < 6) {
         errors.push({
-            msg: 'Password must be at least 6 characters'
+            msg: 'Le mot de passe doit être au moins de 6 caractères'
         });
-        console.log("Password must be at least 6 characters")
+        // console.log("Password must be at least 6 characters")
     }
 
     if (errors.length > 0) {
@@ -354,6 +215,7 @@ app.post("/register", async (req, res, next) => {
             errors,
             username,
             password,
+            isLoggedIn: ""
         });
     } else {
         User.findOne({
@@ -363,12 +225,12 @@ app.post("/register", async (req, res, next) => {
                 errors.push({
                     msg: 'Email already exists'
                 });
-                console.log("Email already exists")
+                // console.log("Email already exists")
                 res.render('register', {
                     errors,
                     username,
                     password,
-
+                    isLoggedIn: ""
                 });
             } else {
                 const newUser = new User({
@@ -383,7 +245,7 @@ app.post("/register", async (req, res, next) => {
                         newUser
                             .save()
                             .then(user => {
-                                console.log("You are now registered and can log in")
+                               // console.log("You are now registered and can log in")
                                 req.flash(
                                     'success_msg',
                                     'You are now registered and can log in'
@@ -396,25 +258,116 @@ app.post("/register", async (req, res, next) => {
             }
         });
     }
-    // User.register({username:req.body.username}, req.body.password, function(err, user) {
-    //     if (err) { 
-    //         console.log(err);
-    //         res.redirect("/register");
-    //      }
-    //      else {
-    //          passport.authenticate("local")(req,res, function(){
-    //              console.log("User register successfully")
-    //              res.redirect("/");
-    //          })
-    //      }
-
-    //   });
-
 
 })
+// Register Page || view 
+app.get('/register', forwardAuthenticated, (req, res) => res.render('register',{
+  
+    isLoggedIn: "",
+    user: " "
+}));
+
+
+// Login post route 
+app.post('/login', async(req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+// Login Page || view 
+app.get('/login', forwardAuthenticated, (req, res) => res.render('login',
+{
+    isLoggedIn: "",
+    user: " "
+}));
+
+// Uplaod musics
+app.post("/musiques", (req, res) => {
+    const music = req.body;
+    Music.create(music, function (err, result) {
+        if (err) {
+            res.send(err)
+        } else {
+            res.send(result)
+        }
+    })
+
+})
+// Display all music
+app.get("/musiques", ensureAuthenticated,(req, res) => {
+    var str = req.user.username;
+    var nameMatch = str.match(/^([^@]*)@/);
+    var name = nameMatch ? nameMatch[1] : null;
+       
+        Music.find(function (err, result) {
+            if (err) {
+                res.send(err)
+            } else {
+
+                res.render("musiques", {
+                    musics: result,
+                    isLoggedIn: req.isAuthenticated(),
+                    user: name,
+                });
+            }
+        })
+})
+
+// Display Single Musique
+
+app.get("/musiques/:musique", (req, res, next) => {
+    if(req.isAuthenticated() ){
+        var str = req.user.username;
+        var nameMatch = str.match(/^([^@]*)@/);
+        var name = nameMatch ? nameMatch[1] : null;
+        Music.findOne({
+            _id: req.params.musique
+        }, (err, result) => {
+            if (!result) {
+                console.log(err);
+            } else {
+                // res.send(result);
+                res.render("singlemusique", {
+                    name: result.artisteName,
+                    title: result.songTitle,
+                    url: result.url,
+                    description: result.description,
+                    user: name,
+                    isLoggedIn: req.isAuthenticated()
+                })
+            }
+    
+        })
+    } else{
+        Music.findOne({
+            _id: req.params.musique
+        }, (err, result) => {
+            if (!result) {
+                console.log(err);
+            } else {
+                // res.send(result);
+                res.render("singlemusique", {
+                    name: result.artisteName,
+                    title: result.songTitle,
+                    url: result.url,
+                    description: result.description,
+                    user: "",
+                    isLoggedIn: ""
+                })
+            }
+    
+        })
+    }
+    
+})
+
+
 app.get('/logout', function (req, res) {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
+    req.flash('success_msg', 'Vous êtes déconnecté');
     res.redirect('/login');
 });
 // app.delete("/musiques", (req,res)=>{

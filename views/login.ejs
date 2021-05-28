@@ -10,12 +10,12 @@
 
     <div class="col-md-8 col-md-offset-2 conForm">
 
-
-        <h3 class="welcome"> Welcome To login Page </h3>
-        <h4 class="welcome"> You don't have an account Register Now to enjoy all the features <a
-                href="/register">Register Now </a> </h4>
+        <%- include("partials/messages") -%>
+        <h3 class="welcome"> Bienvenue à la page de connexion </h3>
+        <h4 class="welcome"> Vous n'avez pas de compte Inscrivez-vous maintenant pour profiter de toutes les fonctionnalités <a
+                href="/register">S'enregistrer Maintenant </a> </h4>
         <div id="message">
-            <%- include("partials/messages") -%>
+           
         </div>
         <form method="post" action="/login" name="cform" id="cform">
             <input type="email" name="username" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
@@ -32,6 +32,6 @@
 
 
 <!-- Footer section -->
-<%- include("partials/footer") -%>
+<!-- < %- include("partials/footer") -%> -->
 
 <!-- End footer -->

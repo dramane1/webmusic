@@ -43,15 +43,15 @@
       <nav class="navigation" role="navigation">
         <ul class="primary-nav">
           <li><a href="/">Accueil </a></li>
-          <li><a href="musiques">Musiques</a></li>
+          <li><a href="/musiques">Musiques</a></li>
           <!-- <li><a href="#Playlist">Clips</a></li> -->
 		  
           <!-- <li><a href=""> A propos </a></li> -->
           <% if(isLoggedIn){ %> 
-            <li><a href=""> Welcome </a></li>
-            <li><a href="/logout"> <input type="submit"   class="logout" value="Logout">  </a></li>
+            <li><a href=""> Bienvenue <%=user%>  </a></li>
+            <li><a href="/logout"> <input type="submit"   class="logout" value="Se déconnecter">  </a></li>
      <% } else{ %> 
-       <li><a href="login"> Connecter Vous </a></li>
+       <li><a href="/login"> Connecter Vous </a></li>
    <%   } %> 
     
         </ul>
@@ -110,7 +110,8 @@
     <iframe height="100%" width="100%" src="<%=url%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class=" downloads-views">
         <p class="description "><%= description%></p>
-                 <button type="button" class="submitBnt btn">Downloads</button>
+                 <!-- <button type="button" class="submitBnt btn">Downloads</button> -->
+                 <p>Vous pourrez telecharger dans les jours a venir</p>
         
            </div>    
 </div> 
@@ -121,5 +122,5 @@
 
 <!-- Footer section -->
 
-<%- include("partials/footer") -%>
+<!-- < %- include("partials/footer") -%> -->
 <!-- End footer -->

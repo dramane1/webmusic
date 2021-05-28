@@ -45,20 +45,20 @@
       <nav class="navigation" role="navigation">
         <ul class="primary-nav">
           <li><a href="/">Accueil </a></li>
-          <li><a href="musiques">Musiques</a></li>
+          <li><a href="/musiques">Musiques</a></li>
           <!-- <li><a href="#Playlist">Clips</a></li> -->
 		  
   
-          <li><a href=""> A propos </a></li>
+          <!-- <li><a href=""> A propos </a></li> -->
          
-          <!-- < % if(isLoggedIn){ %>  -->
-            <!-- < %= user %>  -->
-                 <!-- <li><a href=""> Welcome   </a></li>
-                 <li><a href="/logout"> <input type="submit"   class="logout" value="Logout">  </a></li> -->
-<!--                 
-          < % } else{ %>  -->
-            <!-- <li><a href="login"> Connecter Vous </a></li> -->
-        <!-- < %   } %>  -->
+          <% if(isLoggedIn){ %>  
+              
+                 <li><a href="/"> Bienvenue  <%= user %> </a></li>
+                 <li><a href="/logout"> <input type="submit"   class="logout" value="Se déconnecter">  </a></li>
+             
+          <% } else{ %> 
+          <li><a href="/login"> Connecter Vous </a></li> 
+       <%   } %> 
          
         </ul>
       </nav>
