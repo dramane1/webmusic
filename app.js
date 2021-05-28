@@ -2,8 +2,9 @@ import {} from 'dotenv/config'
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
-import Music from "../Musicejs/models/music.js";
-import User from "../Musicejs/models/user.js";
+import Music from "./models/music.js"
+import User from "./models/user.js";
+import Admin from "./models/admin.js";
 import ejs from "ejs";
 import passport from "passport";
 import session from "express-session";
@@ -13,13 +14,45 @@ import LocalStrategy from "passport-local";
 import MongoStore from 'connect-mongo';
 import {check,validationResult } from 'express-validator';
 import bcrypt from "bcryptjs"
+import AdminBro from "admin-bro";
+import  AdminBroExpress from "@admin-bro/express";
+import {} from "tslib";
+import AdminBroMongoose from "admin-bro-mongoose";
 
 
 // App config
 const port = process.env.PORT || 4000;
 const app = express();
-
 app.use(express.json())
+
+// ADmin config 
+AdminBro.registerAdapter(AdminBroMongoose)
+
+const adminBro = new AdminBro({
+  databases: [mongoose],
+  rootPath: '/admin',
+  resources: [User,Admin,Music]
+})
+
+const ADMIN = {
+  email: process.env.ADMIN_EMAIL || 'email@gmail.com',
+  password: process.env.ADMIN_PASSWORD || '1234',
+}
+
+const router = AdminBroExpress.buildAuthenticatedRouter(adminBro, {
+  cookieName: process.env.ADMIN_COOKIE_NAME || 'admin-bro',
+  cookiePassword: process.env.ADMIN_COOKIE_PASS || 'supersecret-and-long-password-for-a-cookie-in-the-browser',
+  authenticate: async (email, password) => {
+    if (email === ADMIN.email && password === ADMIN.password) {
+      return ADMIN
+    }
+    return null
+  }
+})
+app.use(adminBro.options.rootPath, router)
+
+
+
 // MiddleWares 
 
 app.set('view engine', 'ejs');
@@ -43,7 +76,6 @@ mongoose.connect(
         console.log("DB Connected Successfully");
     }
 );
-
 
 app.use(
     session({
