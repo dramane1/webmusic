@@ -389,10 +389,13 @@ ul li {
 /* -----------------------------------------------------------------------------
 Common Styles
 ------------------------------------------------------------------------------- */
-.section-header{	text-align: center;	padding-bottom: 30px;
+.section-header{	
+text-align: center;	
+padding-bottom: 30px;
 }
 .section-header h2{
-	color: #fff;
+	
+color: #fff;
 }
 .section-header p{
 	
@@ -892,3 +895,11 @@ ul.list-default li {
     text-align: center;
 }
 }
+
+/* .alert.success {
+	background-color: green;
+  }
+  
+  .alert.error {
+	background-color: red;
+  } */

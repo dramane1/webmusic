@@ -6,8 +6,14 @@ import passportLocalMongoose  from "passport-local-mongoose";
 // db for user registration and login
 
 const userSchema = new mongoose.Schema ({
-    username:String,
-    password: String
+    username:{
+        type:String,
+        required: true
+    },
+    password:{
+        type: String,
+        require: true
+    }
  });
 
  

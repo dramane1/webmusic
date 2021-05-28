@@ -1,27 +1,32 @@
 <%- include("partials/header") -%>
 
-<style >
-    .welcome{
+<style>
+    .welcome {
         margin-bottom: 30px;
     }
 </style>
 <div class="row">
-    <div class="col-md-8 col-md-offset-2 conForm">    
-        <h3 class="welcome"> Welcome To the registration page . Register to enjoy full features </h3>   
-    <div id="message"></div>
-    <form method="post" action="/register" name="cform" id="cform">
-    <input  type="email" name="username" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Enter Votre Email" >
-    <input   type="password" name ="password" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Enter password" >
-    <input type="submit"  class="submitBnt" value="Register">
-    <div id="simple-msg"></div>
-    </form>
+    <div class="col-md-8 col-md-offset-2 conForm">
+        <%- include("partials/messages") -%>
+        <h3 class="welcome"> Welcome To the registration page . Register to enjoy full features </h3>
+        <div id="message">
+            <%- include("partials/messages") -%>
+        </div>
+        <form method="post" action="/register" name="cform" id="cform">
+            <input type="email" name="username" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
+                placeholder="Enter Votre Email">
+            <input type="password" name="password" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                placeholder="Enter password">
+            <input type="submit" class="submitBnt" value="Register">
+            <div id="simple-msg"></div>
+        </form>
     </div>
-    </div>
-    </div>
-    </div>
+    
+</div>
+
 
 
 <!-- Footer section -->
 
-
+<%- include("partials/footer") -%>
 <!-- End footer -->

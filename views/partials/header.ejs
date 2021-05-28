@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="/css/font-icon.css">
 <link rel="stylesheet" href="/css/animate.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -50,13 +51,14 @@
   
           <li><a href=""> A propos </a></li>
          
-          <% if(isLoggedIn){ %> 
-                 <li><a href=""> Welcome <%= user %>   </a></li>
-                 <li><a href="/logout"> <input type="submit"   class="logout" value="Logout">  </a></li>
-               
-          <% } else{ %> 
-            <li><a href="login"> Connecter Vous </a></li>
-        <%   } %> 
+          <!-- < % if(isLoggedIn){ %>  -->
+            <!-- < %= user %>  -->
+                 <!-- <li><a href=""> Welcome   </a></li>
+                 <li><a href="/logout"> <input type="submit"   class="logout" value="Logout">  </a></li> -->
+<!--                 
+          < % } else{ %>  -->
+            <!-- <li><a href="login"> Connecter Vous </a></li> -->
+        <!-- < %   } %>  -->
          
         </ul>
       </nav>

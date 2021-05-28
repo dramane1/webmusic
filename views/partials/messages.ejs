@@ -1,0 +1,35 @@
+
+<% if(locals.errors){ %> <% errors.forEach(function(error) { %>
+
+<div class="alert alert-danger fade in alert-dismissible">
+    <%= error.msg %>
+    <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  
+  </div>
+<% });
+     %> <% } %>
+
+<% if(success_msg != ''){ %>
+
+<div class="alert alert-success fade in alert-dismissible">
+    <%= success_msg %>
+    <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  
+  </div>
+
+<% } %>
+<% if(error_msg != ''){ %>
+    <div class="alert alert-danger fade in alert-dismissible">
+        <%= error_msg %>
+        <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      
+      </div>
+
+<% } %>
+ <% if(error != ''){ %>
+<div class="alert alert-danger fade in alert-dismissible">
+    <%= error %>
+    <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  
+  </div>
+<% } %>
