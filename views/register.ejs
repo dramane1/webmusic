@@ -5,24 +5,31 @@
         margin-bottom: 30px;
     }
 </style>
-<div class="row">
-    <div class="col-md-8 col-md-offset-2 conForm">
-        <%- include("partials/messages") -%>
-        <h3 class="welcome">Bienvenue sur la page d'inscription. Inscrivez-vous pour profiter de toutes les fonctionnalités </h3>
-        <div id="message">
-           
+<!-- gallery section -->
+<section id="gallery" class="gallery section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 conForm">
+                <%- include("partials/messages") -%>
+                <h3 class="welcome">Bienvenue sur la page d'inscription. Inscrivez-vous pour profiter de toutes les fonctionnalités </h3>
+                <div id="message">
+                   
+                </div>
+                <form method="post" action="/register" name="cform" id="cform">
+                    <input type="email" name="username"  class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
+                        placeholder="Enter Votre Email">
+                    <input type="password" name="password"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                        placeholder="Enter password">
+                    <input type="submit" class="submitBnt" value="Register">
+                    <div id="simple-msg"></div>
+                </form>
+            </div>
+            
         </div>
-        <form method="post" action="/register" name="cform" id="cform">
-            <input type="email" name="username"  class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
-                placeholder="Enter Votre Email">
-            <input type="password" name="password"  class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                placeholder="Enter password">
-            <input type="submit" class="submitBnt" value="Register">
-            <div id="simple-msg"></div>
-        </form>
-    </div>
-    
-</div>
+        </div>
+ </section>
+
+
 
 
 

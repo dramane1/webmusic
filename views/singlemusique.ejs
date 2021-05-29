@@ -74,18 +74,21 @@
 
 <style >
 
-    .single{
-        margin:0;
+  .single{
+         margin:0;
         padding: 0;
       display: flex;
-      flex-direction: column;
-     align-items: center;
-      position: relative;
-      margin-top: -200px;
+      flex-direction:column;
+     align-items: center;  
+     justify-content: center; 
+       position: relative; 
+     top:-200px;
+      z-index: 999;
      
     }
     .single iframe {
         max-width: 600px;
+        
      min-height: 400px;
     }
     .downloads-views{
@@ -95,7 +98,6 @@
         position: relative;
     margin-bottom: 30px;
     margin-top: 30px;
-    
     padding-left: 30px;
     }
     .downloads-views .description{
@@ -104,9 +106,8 @@
     
 </style>
 
-
-<div class=" single "> 
-
+  <div class="single"> 
+  
     <iframe height="100%" width="100%" src="<%=url%>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div class=" downloads-views">
         <p class="description "><%= description%></p>
@@ -114,13 +115,20 @@
                  <p>Vous pourrez telecharger dans les jours a venir</p>
         
            </div>    
+  
 </div> 
+
+
+
+
+    
+
 
 
 
     
 
 <!-- Footer section -->
-
-<!-- < %- include("partials/footer") -%> -->
+<!-- 
+< %- include("partials/footer") -%> -->
 <!-- End footer -->

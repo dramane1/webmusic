@@ -18,6 +18,7 @@ import AdminBro from "admin-bro";
 import  AdminBroExpress from "@admin-bro/express";
 import {} from "tslib";
 import AdminBroMongoose from "admin-bro-mongoose";
+import mongoosePaginate from "mongoose-paginate-v2";
 
 
 // App config
@@ -174,7 +175,7 @@ const forwardAuthenticated =async function (req, res, next) {
 //   Endpoints set up 
 
 //  Display home Page
-app.get("/", function (req, res) {
+app.get("/", async function (req, res) {
 
 
 
@@ -182,7 +183,7 @@ app.get("/", function (req, res) {
         var str = req.user.username;
         var nameMatch = str.match(/^([^@]*)@/);
         var name = nameMatch ? nameMatch[1] : null;
-        Music.find(function (err, result) {
+      await  Music.find(function (err, result) {
             if (err) {
                 res.send(err)
             } else {
@@ -196,7 +197,7 @@ app.get("/", function (req, res) {
             }
         }).limit(8)
     } else {
-        Music.find(function (err, result) {
+      await  Music.find(function (err, result) {
             if (err) {
                 res.send(err)
             } else {
@@ -317,9 +318,9 @@ app.get('/login', forwardAuthenticated, (req, res) => res.render('login',
 }));
 
 // Uplaod musics
-app.post("/musiques", (req, res) => {
+app.post("/musiques", async(req, res) => {
     const music = req.body;
-    Music.create(music, function (err, result) {
+   await Music.create(music, function (err, result) {
         if (err) {
             res.send(err)
         } else {
@@ -350,12 +351,12 @@ app.get("/musiques", ensureAuthenticated,(req, res) => {
 
 // Display Single Musique
 
-app.get("/musiques/:musique", (req, res, next) => {
+app.get("/musiques/:musique", async(req, res, next) => {
     if(req.isAuthenticated() ){
         var str = req.user.username;
         var nameMatch = str.match(/^([^@]*)@/);
         var name = nameMatch ? nameMatch[1] : null;
-        Music.findOne({
+     await  Music.findOne({
             _id: req.params.musique
         }, (err, result) => {
             if (!result) {
@@ -374,7 +375,7 @@ app.get("/musiques/:musique", (req, res, next) => {
     
         })
     } else{
-        Music.findOne({
+      await  Music.findOne({
             _id: req.params.musique
         }, (err, result) => {
             if (!result) {

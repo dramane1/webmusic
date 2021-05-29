@@ -1,33 +1,42 @@
 <%- include("partials/header") -%>
 
+
 <style>
     .welcome {
         margin-bottom: 30px;
     }
 </style>
 
-<div class="row">
+<!-- Contac form  -->
+<section id="gallery" class="gallery section">
+    <div class="container-fluid">
+        <div class="row">
 
-    <div class="col-md-8 col-md-offset-2 conForm">
-
-        <%- include("partials/messages") -%>
-        <h3 class="welcome"> Bienvenue à la page de connexion </h3>
-        <h4 class="welcome"> Vous n'avez pas de compte Inscrivez-vous maintenant pour profiter de toutes les fonctionnalités <a
-                href="/register">S'enregistrer Maintenant </a> </h4>
-        <div id="message">
-           
+            <div class="col-md-8 col-md-offset-2 conForm">
+        
+                <%- include("partials/messages") -%>
+                <h3 class="welcome"> Bienvenue à la page de connexion </h3>
+                <h4 class="welcome"> Vous n'avez pas de compte Inscrivez-vous maintenant pour profiter de toutes les fonctionnalités <a
+                        href="/register">S'enregistrer Maintenant </a> </h4>
+                <div id="message">
+                   
+                </div>
+                <form method="post" action="/login" name="cform" id="cform">
+                    <input type="email" name="username" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
+                        placeholder="Enter Votre Email">
+                    <input type="password" name="password" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
+                        placeholder="Enter password">
+                    <input type="submit" class="submitBnt" value="Login">
+                    <div id="simple-msg"></div>
+        
+                </form>
+            </div>
         </div>
-        <form method="post" action="/login" name="cform" id="cform">
-            <input type="email" name="username" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr"
-                placeholder="Enter Votre Email">
-            <input type="password" name="password" class="col-xs-12 col-sm-12 col-md-12 col-lg-12"
-                placeholder="Enter password">
-            <input type="submit" class="submitBnt" value="Login">
-            <div id="simple-msg"></div>
+        </div>
+</section>
 
-        </form>
-    </div>
-</div>
+
+
 
 
 
